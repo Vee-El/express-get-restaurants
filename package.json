@@ -1,19 +1,28 @@
 {
   "name": "express_and_sequelize_practice",
   "version": "1.0.0",
-  "description": "",
+  "description": "![logo](https://user-images.githubusercontent.com/44912347/202296600-c5f247d6-9616-49db-88f0-38433429d781.jpg)",
   "main": "index.js",
   "scripts": {
     "seed": "node seed.js",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.3",
+    "express": "^4.18.2",
     "path": "^0.12.7",
     "sequelize": "^6.21.4",
     "sqlite3": "^5.0.11"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vee-El/express-get-restaurants.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Vee-El/express-get-restaurants/issues"
+  },
+  "homepage": "https://github.com/Vee-El/express-get-restaurants#readme"
 }
