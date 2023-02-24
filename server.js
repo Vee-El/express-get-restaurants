@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 const app = express();
 const {Restaurant} = require("./models/index")
 const {sequelize} = require("./db");
@@ -6,6 +6,67 @@ const {sequelize} = require("./db");
 const port = 3000;
 
 //TODO: Create your GET Request Route Below: 
+
+// Middleware to parse data included in the body of the request as JSON
+app.use(express.json());
+
+// Create a new restaurant
+app.post('/restaurant', async (req, res) => {
+  try {
+    // Create a new restaurant with the provided data
+    const newRestaurant = await Restaurant.create(req.body);
+
+    // Respond with the newly created restaurant
+    res.json(newRestaurant);
+  } catch (error) {
+    // Respond with an error message
+    res.status(400).send({ error: error.message });
+  }
+});
+
+// Update an existing restaurant
+app.put('/restaurant/:id', async (req, res) => {
+  try {
+    // Find the restaurant with the provided ID
+    const restaurant = await Restaurant.findByPk(req.params.id);
+
+    // If the restaurant not found throw an error with message 'No restaurant found'
+    if (!restaurant) {
+      throw new Error('No restaurant found');
+    }
+
+    // Update the restaurant with the provided data
+    await restaurant.update(req.body);
+
+    // Respond with the updated restaurant
+    res.json(restaurant);
+  } catch (error) {
+    // Respond with an error message
+    res.status(400).send({ error: error.message });
+  }
+});
+
+// Delete a restaurant
+app.delete('/restaurant/:id', async (req, res) => {
+  try {
+    // Find the restaurant with the provided ID
+    const restaurant = await Restaurant.findByPk(req.params.id);
+
+    // If the restaurant not found throw an error with message 'No restaurant found'
+    if (!restaurant) {
+      throw new Error('No restaurant found');
+    }
+
+    // Delete the restaurant
+    await restaurant.destroy();
+
+    // Respond with a success message
+    res.json({ message: 'Restaurant deleted successfully' });
+  } catch (error) {
+    // Respond with an error message
+    res.status(400).send({ error: error.message });
+  }
+});
 
 // Find all
 app.get('/restaurant', async (req, res) => {
